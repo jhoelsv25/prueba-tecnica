@@ -1,0 +1,13 @@
+<ul class="flex flex-col gap-3 py-5">
+  @for (item of items(); track $index) {
+  <li
+    class="p-2 mx-2 hover:rounded-lg hover:bg-slate-200 font-semibold text-gray-200 hover:text-black cursor-pointer"
+    routerLinkActive="bg-slate-200 font-bold rounded-lg  text-black"
+    [routerLink]="[item.link]"
+  >
+    <a class="capitalize">
+      <span>{{ item.name }}</span>
+    </a>
+  </li>
+  }
+</ul>
