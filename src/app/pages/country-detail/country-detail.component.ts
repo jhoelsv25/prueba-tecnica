@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CountryService } from '../../services/country.service';
 import { CardCountryDetailComponent } from '../../components/card-country-detail/card-country-detail.component';
 
@@ -13,7 +7,6 @@ import { CardCountryDetailComponent } from '../../components/card-country-detail
   selector: 'country-detail',
   standalone: true,
   templateUrl: './country-detail.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, CardCountryDetailComponent],
 })
 export class CountryDetailComponent {

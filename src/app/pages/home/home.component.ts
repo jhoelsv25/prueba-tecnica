@@ -31,8 +31,6 @@ export class HomeComponent implements OnInit {
   private countryService = inject(CountryService);
 
   ngOnInit(): void {
-    this.countryService.getCountry().subscribe((result) => {
-      console.log(result);
-    });
+    this.countryService.getCountry().subscribe();
   }
 }

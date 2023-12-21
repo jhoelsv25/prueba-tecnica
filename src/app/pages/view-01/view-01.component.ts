@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-view-01',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
-  templateUrl: './view-01.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule],
+  template: `<div class="container mx-auto h-full md:p-10 p-3">
+    <h2 class="font-bold text-zinc-700">Hola! Esta es la vista 01</h2>
+  </div> `,
 })
-export class View01Component { }
+export class View01Component {}
