@@ -1,0 +1,44 @@
+<section class="flex flex-col gap-3">
+  @if (countryDetail()) {
+  <div class="rounded-2xl shadow-md w-60">
+    <img
+      src=""
+      alt=""
+      class="h-32 w-full aspect-square object-cover rounded-lg"
+    />
+  </div>
+  <div class="flex gap-2 p-3 items-center">
+    <img
+      [srcset]="countryDetail()?.flag"
+      alt="flag "
+      class="w-10 h-8 rounded-sm"
+    />
+    <label class="flex flex-col items-start">
+      <h1 class="font-semibold text-sky-500">
+        {{ countryDetail()?.name }}
+      </h1>
+      <p class="ont-medium text-gray-500">
+        {{ countryDetail()?.continent?.name }}
+      </p>
+    </label>
+  </div>
+  <label class="flex gap-3">
+    <strong class="text-sky-500">Capital:</strong>
+    <span>{{ countryDetail()?.capital }}</span>
+  </label>
+  <label class="flex gap-3">
+    <strong class="text-sky-500">Population:</strong>
+    <span>juanit</span>
+  </label>
+  <label class="flex gap-3">
+    <strong class="text-sky-500">Currency:</strong>
+    @for (item of countryDetail()?.currencies; track $index) {
+    <span>{{ item }}</span>
+    }
+  </label>
+  <label class="flex gap-3">
+    <strong class="text-sky-500">Region:</strong>
+    <span>juanit</span>
+  </label>
+  }@else { }
+</section>
