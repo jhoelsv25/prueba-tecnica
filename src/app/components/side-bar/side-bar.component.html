@@ -1,11 +1,12 @@
-<ul class="flex flex-col gap-3 py-5">
+<ul [class]="styleClass">
   @for (item of items(); track $index) {
   <li
     class="p-2 mx-2 hover:rounded-lg hover:bg-slate-200 font-semibold text-gray-200 hover:text-black cursor-pointer"
     [routerLink]="[item.link]"
     routerLinkActive="bg-slate-200 font-bold rounded-lg  text-black"
   >
-    <a class="capitalize" routerLinkActive="text-black">
+    <a [class]="classActived" routerLinkActive="text-black">
+      <img [src]="item.icon" [alt]="item.name" [class]="showIcon" />
       <span>{{ item.name }}</span>
     </a>
   </li>

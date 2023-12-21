@@ -25,9 +25,17 @@
       />
     </svg>
   </button>
-  <main class="w-full bg-sky-50">
+  <main class="w-full bg-sky-50 min-h-screen">
     <router-outlet></router-outlet>
   </main>
+
+  <footer class="md:hidden flex absolute bottom-0 bg-white w-full items-center">
+    <side-bar
+      styleClass="flex items-center justify-center w-full gap-2"
+      classActived="flex items-center flex-col justify-center text-sky-500 "
+      showIcon="flex"
+    ></side-bar>
+  </footer>
 </section>
 
 <country-detail></country-detail>
