@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
-  OnInit,
   ViewChild,
   inject,
   signal,
@@ -11,25 +9,20 @@ import {
 import { FilterByCountryComponent } from '../filter-by-country/filter-by-country.component';
 import { CountryService } from '../../services/country.service';
 import { Router } from '@angular/router';
-import { query } from '@angular/animations';
 
 @Component({
   selector: 'search-box',
   standalone: true,
   templateUrl: './search-box.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, FilterByCountryComponent],
 })
-export class SearchBoxComponent implements OnInit {
+export class SearchBoxComponent {
   private router = inject(Router);
   private countryService = inject(CountryService);
   @ViewChild('filterByContinent')
   filterByContinent!: ElementRef;
   public isShow = signal<boolean>(false);
 
-  ngOnInit(): void {
-    console.log('FILTWER ', this.filterByContinent);
-  }
   handleFocus() {
     this.isShow.update(() => true);
   }
