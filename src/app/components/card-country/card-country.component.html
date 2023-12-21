@@ -4,7 +4,7 @@
 
     <div class="rounded-2xl shadow-md w-60 max-md:w-44">
       <img
-        src=""
+        [src]="item.image"
         alt=""
         class="h-24 w-full aspect-square object-cover rounded-t-2xl"
       />
@@ -26,7 +26,7 @@
             class="font-medium text-gray-500 max-md:text-xs"
             [class.text-gray-300]="item.isSelected"
           >
-            {{ item.continent }}
+            {{ item.continent.name }}
           </p>
         </div>
       </footer>

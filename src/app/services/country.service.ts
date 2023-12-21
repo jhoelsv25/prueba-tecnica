@@ -1,12 +1,13 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Country } from '../interfaces/country.intrerfcace';
-import { map, refCount } from 'rxjs';
+import { Observable, catchError, forkJoin, map, of, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { GET_COUNTRIES } from '../constants/get-contries';
 import { ContinentService } from './continent.service';
 import { GET_COUNTRY_BY_ID } from '../constants/get-country-by-id';
 import { CountryDetail } from '../interfaces/country-detail.interface';
+import { ApolloQueryResult } from '@apollo/client/core/types';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,7 @@ export class CountryService {
       });
     } else if (this.selectedContinents().length > 0) {
       return contries.filter((country) => {
-        return this.selectedContinents().includes(country.continent);
+        return this.selectedContinents().includes(country.continent.name);
       });
     }
     return contries;
@@ -40,29 +41,61 @@ export class CountryService {
 
   public countryDetail = signal<CountryDetail | null>(null);
 
-  public getCountry() {
+  public getCountry(): Observable<Country[]> {
     return this.apollo
-      .watchQuery({
+      .watchQuery<{ countries: Country[] }>({
         query: GET_COUNTRIES,
       })
       .valueChanges.pipe(
-        map((result: any) => {
-          const countries = result.data.countries.map((country: any) => {
-            return {
-              name: country.name,
-              code: country.code,
-              continent: country.continent.name,
-              flag: this.getFlagCountry(country.code),
-              image: this.getImageCountry(country.name),
-              isSelected: false,
-            };
-          });
-          this.countries.set(countries);
-          return countries;
+        switchMap((result: ApolloQueryResult<{ countries: Country[] }>) => {
+          const countryRequests = result.data.countries.map(
+            (country: Country) => {
+              return this.getImageCountry(country.name).pipe(
+                map((image) => {
+                  return {
+                    name: country.name,
+                    code: country.code,
+                    continent: {
+                      name: country.continent.name,
+                    },
+                    flag: this.getFlagCountry(country.code),
+                    isSelected: false,
+                    image: image,
+                  };
+                }),
+                catchError((error) => {
+                  console.error(error);
+                  return of(null);
+                })
+              );
+            }
+          );
+          return forkJoin(countryRequests);
+        }),
+        map((countries: (Country | null)[]) => {
+          const validCountries = countries.filter(
+            (country) => country !== null
+          ) as Country[];
+          this.countries.set(validCountries);
+          return validCountries;
+        }),
+        catchError((error) => {
+          console.error(error);
+          return of([] as Country[]);
         })
       );
   }
-
+  private getImageCountry(name: string) {
+    const key = '34054116-27668f1eaa6231d6c30e3050f';
+    const url = `https://pixabay.com/api/?key=${key}&q=${name}&image_type=photo`;
+    return this.http.get(url).pipe(
+      map((result: any) => {
+        const image = result.hits[0].webformatURL;
+        return image;
+      }),
+      catchError((error) => of(''))
+    );
+  }
   public getCountryByCode(code: string) {
     return this.apollo
       .watchQuery({
@@ -83,6 +116,10 @@ export class CountryService {
           return newData;
         })
       );
+  }
+
+  private getFlagCountry(code: string) {
+    return `https://flagcdn.com/w80/${code.toLowerCase()}.png`;
   }
 
   public viewDetails(code: string) {
@@ -107,19 +144,5 @@ export class CountryService {
 
   public searchCountry(country: string) {
     this.search.set(country);
-  }
-
-  private getImageCountry(country: string) {
-    const key = '34054116-27668f1eaa6231d6c30e3050f';
-    const url = `https://pixabay.com/api/?key=${key}&q=${country}&image_type=photo`;
-    return this.http.get(url).pipe(
-      map((result: any) => {
-        const image = result.hits[0].webformatURL;
-        return image;
-      })
-    );
-  }
-  private getFlagCountry(code: string) {
-    return `https://flagcdn.com/w80/${code.toLowerCase()}.png`;
   }
 }

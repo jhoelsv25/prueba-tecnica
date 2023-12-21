@@ -1,10 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-} from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CountryService } from '../../services/country.service';
 import { ContinentService } from '../../services/continent.service';
 
@@ -13,7 +8,6 @@ import { ContinentService } from '../../services/continent.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card-country.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardCountryComponent {
   private countryService = inject(CountryService);
@@ -23,9 +17,7 @@ export class CardCountryComponent {
     this.continetService.selectedContinents()
   );
 
-  ngOnInit(): void {
-    console.log('selected contries', this.selectedCountry());
-  }
+  ngOnInit(): void {}
 
   public countries = computed(() => this.countryService.contriesFiltered());
 
