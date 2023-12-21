@@ -1,27 +1,45 @@
-# PruebaTecnica
+# Objetivo del Proyecto
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.1.
+El objetivo del reto es desarrollar una aplicación web que muestre países utilizando el API
+GraphQL proporcionado.
+[API GraphQL](https://countries.trevorblades.com/)
 
-## Development server
+## Instalación
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Asegúrate de tener Node.js y npm instalados antes de continuar.
 
-## Code scaffolding
+1. Clona el repositorio: `git clone https://github.com/jhoelsv25/prueba-tecnica.git`
+2. Accede al directorio del proyecto: `cd prueba-tecnica`
+3. Instala las dependencias: `npm install`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Desarrollo Local
 
-## Build
+Ejecuta `ng serve` para iniciar un servidor de desarrollo. Navega a `http://localhost:4200/`. La aplicación se recargará automáticamente si realizas cambios en los archivos.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Estructura del Proyecto
 
-## Running unit tests
+- `/src`
+  - `/app`
+    - `/components`: Contiene los componentes reutilizables de la aplicación.
+    - `/constanst`: Contiene las querys para hacer la peticion a GraphQl.
+    - `/services`: Contiene los servicios utilizados para la lógica de negocio.
+    - `/interfaces`: Contiene las interfaces de datos.
+    - `/mocks`: Contiene datos estaticos como por ejemplo los continentes.
+    - `/pages`: Contiene las paginas para enrutamiento de la aplicación.
+    - `/app.component.html`: Componente principal de la aplicación.
+    - `app.config`: Contiene los modulos utilizados en la aplicación.
+    - `app.routing`: Contiene las rutas de la aplicación.
+  - `/assets`: Contiene archivos estáticos como imágenes, svg, etc.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Tecnologías Utilizadas
 
-## Running end-to-end tests
+las tecnologias utlizadas en este proyecto
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Angular
+- Apollo
+- GraphQL
+- Tailwindcss
 
-## Further help
+## Autor
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- **Jhoel Silvestre** - _Desarrollador FrontEnd_ - [jhoelsv25](https://jhoel-silvestre.web.app/)
