@@ -19,51 +19,21 @@ import { Router } from '@angular/router';
 export class SearchBoxComponent {
   private router = inject(Router);
   private countryService = inject(CountryService);
+  public isShow = signal<boolean>(false);
   @ViewChild('filterByContinent')
   filterByContinent!: ElementRef;
-  public isShow = signal<boolean>(false);
+  @ViewChild('inputSearch') inputSearch!: ElementRef;
 
-  handleFocus() {
+  handleFocus(event: Event) {
+    event.stopPropagation();
     this.isShow.update(() => true);
-  }
-
-  handleBlur(event: FocusEvent | MouseEvent) {
-    this.isShow.update(() => true);
-    /* if (this.isMouseCliked()) {
-      this.isShow.update(() => true);
-    } else {
-      this.isShow.update(() => false);
-    } */
-  }
-
-  isMouseCliked(event?: MouseEvent): boolean {
-    console.log(this.filterByContinent);
-    if (
-      this.filterByContinent &&
-      this.elementContains(
-        this.filterByContinent.nativeElement,
-        event?.target || null
-      )
-    ) {
-      console.log('Se hizo clic dentro del div específico.');
-      // Realiza acciones adicionales según sea necesario
-      return true;
-    } else {
-      console.log('Se hizo clic fuera del div específico.');
-      // Realiza acciones adicionales según sea necesario
-
-      return false;
-    }
-  }
-
-  elementContains(parent: HTMLElement, child: EventTarget | null): boolean {
-    return parent.contains(child as Node);
   }
 
   public handleInput(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     if (value === '') return;
     this.router.navigate(['/home', { search: value }]);
+    this.isShow.update(() => false);
     this.countryService.searchCountry(value);
   }
 

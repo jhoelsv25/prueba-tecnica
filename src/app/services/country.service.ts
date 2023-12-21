@@ -24,7 +24,16 @@ export class CountryService {
   );
 
   public isCountrySelected = signal<boolean>(false);
-
+  public viewDetails(code: string) {
+    this.isCountrySelected.update(() => true);
+    this.countries.update((prev) => {
+      return prev.map((value) =>
+        value.code === code
+          ? { ...value, isSelected: true }
+          : { ...value, isSelected: false }
+      );
+    });
+  }
   public contriesFiltered = computed(() => {
     const contries = this.countries();
     if (this.search() !== '') {
@@ -125,17 +134,6 @@ export class CountryService {
 
   private getFlagCountry(code: string) {
     return `https://flagcdn.com/w80/${code.toLowerCase()}.png`;
-  }
-
-  public viewDetails(code: string) {
-    this.countries.update((prev) => {
-      this.isCountrySelected.update(() => true);
-      return prev.map((value) =>
-        value.code === code
-          ? { ...value, isSelected: true }
-          : { ...value, isSelected: false }
-      );
-    });
   }
 
   public removeDetails() {

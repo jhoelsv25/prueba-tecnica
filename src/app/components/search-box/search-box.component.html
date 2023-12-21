@@ -7,13 +7,13 @@
         >Pais</label
       >
       <input
+        #inputSearch
         id="inputSearch"
         type="text"
         placeholder="Escribe el país que deseas ver"
         class="focus:outline-none focus:border-b-2 focus:border-sky-500 w-60"
-        (focus)="handleFocus()"
-        (blur)="handleBlur($event)"
         (input)="handleInput($event)"
+        (focus)="handleFocus($event)"
       />
     </span>
     <button
@@ -39,11 +39,7 @@
     </button>
   </div>
   @if (isShow()) {
-  <div
-    class="absolute top-20"
-    #filterByContinent
-    (click)="isMouseCliked($event)"
-  >
+  <div class="absolute top-20" #filterByContinent>
     <filter-by-country (isShow)="handleUpdateShow($event)"></filter-by-country>
   </div>
   }
