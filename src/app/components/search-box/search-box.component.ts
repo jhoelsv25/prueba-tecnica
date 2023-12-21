@@ -69,4 +69,8 @@ export class SearchBoxComponent implements OnInit {
     if (value === '') return;
     this.countryService.searchCountry(value);
   }
+
+  public handleUpdateShow(value: boolean) {
+    this.isShow.update((show) => !show);
+  }
 }

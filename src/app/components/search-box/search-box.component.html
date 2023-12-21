@@ -44,7 +44,7 @@
     #filterByContinent
     (click)="isMouseCliked($event)"
   >
-    <filter-by-country></filter-by-country>
+    <filter-by-country (isShow)="handleUpdateShow($event)"></filter-by-country>
   </div>
   }
 </section>

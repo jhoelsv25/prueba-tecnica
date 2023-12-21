@@ -24,5 +24,6 @@ export class CountryDetailComponent {
 
   toggleCart() {
     this.countryService.isCountrySelected.update((value) => !value);
+    this.countryService.removeDetails();
   }
 }

@@ -96,6 +96,15 @@ export class CountryService {
     });
   }
 
+  public removeDetails() {
+    this.isCountrySelected.update(() => false);
+    this.countries.update((prev) => {
+      return prev.map((value) => {
+        return { ...value, isSelected: false };
+      });
+    });
+  }
+
   public searchCountry(country: string) {
     this.search.set(country);
   }
