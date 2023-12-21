@@ -11,7 +11,7 @@
       <label
         [class.border-sky-500]="item.selected"
         [class.border-transparent]="!item.selected"
-        class="h-36 w-28 border-4 rounded-lg p-2 flex flex-col cursor-pointer"
+        class="h-36 w-28 border-4 rounded-lg p-2 flex flex-col cursor-pointer max-md:w-24"
         for="continent-{{ item.name }}"
       >
         <img
@@ -20,7 +20,7 @@
           class="h-full w-full aspect-square object-cover rounded-lg mr-2"
         />
         <footer class="flex justify-between">
-          <span class="py-2 font-medium text-zinc-700">{{
+          <span class="py-2 font-medium text-zinc-700 max-md:text-sm">{{
             item.name | titlecase
           }}</span>
           <input

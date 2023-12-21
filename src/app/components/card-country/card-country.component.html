@@ -1,8 +1,8 @@
 <section>
-  <div class="flex flex-wrap gap-3">
+  <div class="flex flex-wrap gap-3 max-md:gap-1">
     @for (item of countries(); track $index) {
 
-    <div class="rounded-2xl shadow-md w-60">
+    <div class="rounded-2xl shadow-md w-60 max-md:w-44">
       <img
         src=""
         alt=""
@@ -17,13 +17,13 @@
         <img [srcset]="item.flag" alt="flag " class="w-10 h-8 rounded-sm" />
         <div class="flex flex-col items-start">
           <h1
-            class="font-medium text-sky-500 truncate w-32"
+            class="font-medium text-sky-500 truncate w-32 max-md:w-24 max-md:text-sm"
             [class.text-white]="item.isSelected"
           >
             {{ item.name }}
           </h1>
           <p
-            class="ont-medium text-gray-500"
+            class="font-medium text-gray-500 max-md:text-xs"
             [class.text-gray-300]="item.isSelected"
           >
             {{ item.continent }}

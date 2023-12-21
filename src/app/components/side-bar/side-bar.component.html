@@ -2,10 +2,10 @@
   @for (item of items(); track $index) {
   <li
     class="p-2 mx-2 hover:rounded-lg hover:bg-slate-200 font-semibold text-gray-200 hover:text-black cursor-pointer"
-    routerLinkActive="bg-slate-200 font-bold rounded-lg  text-black"
     [routerLink]="[item.link]"
+    routerLinkActive="bg-slate-200 font-bold rounded-lg  text-black"
   >
-    <a class="capitalize">
+    <a class="capitalize" routerLinkActive="text-black">
       <span>{{ item.name }}</span>
     </a>
   </li>
