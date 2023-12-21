@@ -1,11 +1,13 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Continent } from '../interfaces/continent.interface';
 import { CONTINENTS } from '../mocks/continent';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContinentService {
+  private router = inject(Router);
   public continent = signal<Continent[]>(CONTINENTS);
   public selectedContinents = signal<string[]>([]);
   constructor() {}
@@ -32,6 +34,7 @@ export class ContinentService {
         return [...continents, name];
       }
     });
+    this.router.navigate(['/home', { continent: this.selectedContinents() }]);
   }
 
   public removeAllSelected() {
@@ -42,5 +45,6 @@ export class ContinentService {
       });
     });
     this.selectedContinents.set([]);
+    this.router.navigate(['/home']);
   }
 }

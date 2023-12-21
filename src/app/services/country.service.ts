@@ -90,10 +90,15 @@ export class CountryService {
     const url = `https://pixabay.com/api/?key=${key}&q=${name}&image_type=photo`;
     return this.http.get(url).pipe(
       map((result: any) => {
-        const image = result.hits[0].webformatURL;
+        const image =
+          result.hits[0].webformatURL || result.hits[0].largeImageURL;
+        if (!image) {
+          return 'https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg';
+        }
+
         return image;
       }),
-      catchError((error) => of(''))
+      catchError((error) => of(error))
     );
   }
   public getCountryByCode(code: string) {

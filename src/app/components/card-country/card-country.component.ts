@@ -1,12 +1,13 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { CountryService } from '../../services/country.service';
 import { ContinentService } from '../../services/continent.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'card-country',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './card-country.component.html',
 })
 export class CardCountryComponent {

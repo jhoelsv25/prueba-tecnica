@@ -6,7 +6,6 @@ import {
   computed,
   inject,
 } from '@angular/core';
-import { CountryService } from '../../services/country.service';
 import { ContinentService } from '../../services/continent.service';
 
 @Component({
@@ -16,7 +15,6 @@ import { ContinentService } from '../../services/continent.service';
   templateUrl: './filter-by-country.component.html',
 })
 export class FilterByCountryComponent {
-  private countryService = inject(CountryService);
   private continentService = inject(ContinentService);
   public continent = computed(() => this.continentService.continent());
   @Output() isShow = new EventEmitter<boolean>();

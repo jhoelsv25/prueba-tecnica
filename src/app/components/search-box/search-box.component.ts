@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { FilterByCountryComponent } from '../filter-by-country/filter-by-country.component';
 import { CountryService } from '../../services/country.service';
+import { Router } from '@angular/router';
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'search-box',
@@ -19,6 +21,7 @@ import { CountryService } from '../../services/country.service';
   imports: [CommonModule, FilterByCountryComponent],
 })
 export class SearchBoxComponent implements OnInit {
+  private router = inject(Router);
   private countryService = inject(CountryService);
   @ViewChild('filterByContinent')
   filterByContinent!: ElementRef;
@@ -67,6 +70,7 @@ export class SearchBoxComponent implements OnInit {
   public handleInput(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     if (value === '') return;
+    this.router.navigate(['/home', { search: value }]);
     this.countryService.searchCountry(value);
   }
 
