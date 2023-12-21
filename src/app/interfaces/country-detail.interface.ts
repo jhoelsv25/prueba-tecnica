@@ -1,6 +1,7 @@
 export interface CountryDetail {
   name: string;
   native: string;
+  code: string;
   capital: string;
   flag: string;
   currencies: string[];

@@ -2,12 +2,12 @@
   @if (countryDetail()) {
   <div class="rounded-2xl shadow-md w-60">
     <img
-      src=""
+      [src]="image()"
       alt=""
       class="h-32 w-full aspect-square object-cover rounded-lg"
     />
   </div>
-  <div class="flex gap-2 p-3 items-center">
+  <div class="flex gap-2 items-center">
     <img
       [srcset]="countryDetail()?.flag"
       alt="flag "
@@ -25,6 +25,12 @@
   <label class="flex gap-3">
     <strong class="text-sky-500">Capital:</strong>
     <span>{{ countryDetail()?.capital }}</span>
+  </label>
+  <label class="flex gap-3">
+    <strong class="text-sky-500">Languajes:</strong>
+    @for (item of countryDetail()?.languages; track $index) {
+    <span>{{ item.name }}</span>
+    }
   </label>
   <label class="flex gap-3">
     <strong class="text-sky-500">Population:</strong>

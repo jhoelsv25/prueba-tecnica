@@ -90,13 +90,13 @@ export class CountryService {
     const url = `https://pixabay.com/api/?key=${key}&q=${name}&image_type=photo`;
     return this.http.get(url).pipe(
       map((result: any) => {
-        const image =
-          result.hits[0].webformatURL || result.hits[0].largeImageURL;
-        if (!image) {
+        if (result.hits && result.hits.length > 0) {
+          const image =
+            result.hits[0].webformatURL || result.hits[0].largeImageURL;
+          return image;
+        } else {
           return 'https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg';
         }
-
-        return image;
       }),
       catchError((error) => of(error))
     );
@@ -132,7 +132,7 @@ export class CountryService {
       this.isCountrySelected.update(() => true);
       return prev.map((value) =>
         value.code === code
-          ? { ...value, isSelected: !value.isSelected }
+          ? { ...value, isSelected: true }
           : { ...value, isSelected: false }
       );
     });
