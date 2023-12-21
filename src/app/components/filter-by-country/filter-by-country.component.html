@@ -1,0 +1,44 @@
+<section class="bg-white rounded-3xl p-5">
+  <header class="flex justify-between items-center pb-3">
+    <h1>Filtrar por continentes</h1>
+    <button class="text-sky-500 hover:underline" (click)="removeAllSelected()">
+      Limpiar
+    </button>
+  </header>
+  <main>
+    <div class="flex flex-wrap gap-3">
+      @for (item of continent(); track $index) {
+      <label
+        [class.border-sky-500]="item.selected"
+        [class.border-transparent]="!item.selected"
+        class="h-36 w-28 border-4 rounded-lg p-2 flex flex-col cursor-pointer"
+        for="continent-{{ item.name }}"
+      >
+        <img
+          [srcset]="item.image"
+          alt="Continente"
+          class="h-full w-full aspect-square object-cover rounded-lg mr-2"
+        />
+        <footer class="flex justify-between">
+          <span class="py-2 font-medium text-zinc-700">{{
+            item.name | titlecase
+          }}</span>
+          <input
+            type="checkbox"
+            class=""
+            id="continent-{{ item.name }}"
+            [checked]="item.selected"
+            (change)="updateSelection(item.name)"
+            class="hidden"
+          />
+        </footer>
+      </label>
+      }@empty {
+      <div class="flex items-center justify-center">
+        <h2 class="text-xl text-sky-500">Cargando ...</h2>
+      </div>
+
+      }
+    </div>
+  </main>
+</section>
